@@ -2,6 +2,7 @@ package com.tmet.sitiosseguros;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,6 +35,9 @@ public class listViewPlaces extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_places);
 
+        Intent myIntent = getIntent(); // gets the previously created intent
+        int myposition = myIntent.getIntExtra("position",0);
+
         try
         {
             conexion = ConexionSQL.ConnectionHelper();
@@ -52,9 +56,24 @@ public class listViewPlaces extends AppCompatActivity {
         // Defined Array values to show in ListView
         ArrayList<String> values=new ArrayList<>();
 
-        for(int i=0;i<lstSitios.size();i++){
-            values.add(lstSitios.get(i).getNombre());
+        //for(int i=0;i<lstSitios.size();i++){
+        if(myposition==0){
+            //values.clear();
+            for(int i=0;i<5;i++){
+                values.add(lstSitios.get(i).getNombre());
+            }
+        }else if(myposition==1){
+            //values.clear();
+            for(int i=5;i<10;i++){
+                values.add(lstSitios.get(i).getNombre());
+            }
+        }else if(myposition==2){
+            //values.clear();
+            for(int i=10;i<15;i++){
+                values.add(lstSitios.get(i).getNombre());
+            }
         }
+
 
 
 

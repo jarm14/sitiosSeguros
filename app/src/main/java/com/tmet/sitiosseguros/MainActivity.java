@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 // ListView Clicked item index
                 int itemPosition     = position;
 
+
                 // ListView Clicked item value
                 String  itemValue    = (String) lstMenu.getItemAtPosition(position);
 
@@ -78,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
                         "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
                         .show();
 
-                if(position==0){
-                    Intent myIntent = new Intent(view.getContext(), listViewPlaces.class);
-                    startActivityForResult(myIntent, 0);
 
-                }
+                    Intent myIntent = new Intent(view.getContext(), listViewPlaces.class);
+                    myIntent.putExtra("position",position);
+                    startActivity(myIntent);
+
 
 
 
