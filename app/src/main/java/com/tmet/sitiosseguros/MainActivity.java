@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
                         .show();
 
 
-                    Intent myIntent = new Intent(view.getContext(), listViewPlaces.class);
+                    Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
                     myIntent.putExtra("position",position);
+
                     startActivity(myIntent);
 
 

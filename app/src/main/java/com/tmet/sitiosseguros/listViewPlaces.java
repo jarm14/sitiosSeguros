@@ -38,6 +38,7 @@ public class listViewPlaces extends AppCompatActivity {
         Intent myIntent = getIntent(); // gets the previously created intent
         int myposition = myIntent.getIntExtra("position",0);
 
+
         try
         {
             conexion = ConexionSQL.ConnectionHelper();
@@ -73,6 +74,8 @@ public class listViewPlaces extends AppCompatActivity {
                 values.add(lstSitios.get(i).getNombre());
             }
         }
+
+
 
 
 
