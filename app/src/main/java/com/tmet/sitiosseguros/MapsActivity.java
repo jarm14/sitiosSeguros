@@ -159,7 +159,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLng(decc));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(17));*/
 
-        marcadores();
+        //marcadores();
     }
 
     public void marcadores()
@@ -210,8 +210,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng pos=new LatLng(lat,len);
             for(int i=0;i<lstSitios.size();i++)
             {
-                dist= SphericalUtil.computeDistanceBetween(coordenadas(values.get(i).getUbicacion()),pos);
-                if(dist<=50000)
+                dist= SphericalUtil.computeDistanceBetween(coordenadas(lstSitios.get(i).getUbicacion()),pos);
+                if(dist<=10000)
                 {
                     values.add(lstSitios.get(i));
                 }
