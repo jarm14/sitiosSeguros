@@ -4,9 +4,12 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -96,9 +99,30 @@ public class MainActivity extends AppCompatActivity {
         host.addTab(spec);
 
         //Tab 2
-        spec = host.newTabSpec("Llamada");
+        spec = host.newTabSpec("Mensaje");
         spec.setContent(R.id.tab2);
-        spec.setIndicator("Llamada");
+
+        //setContentView(R.layout.message_config);
+        final EditText name=(EditText) findViewById(R.id.txtName);
+        final EditText tel=(EditText) findViewById(R.id.txtTel);
+
+
+
+
+        Button btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
+        btnSendSMS.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String message="Hola, "+name.getText().toString()+" se encuentra en una zona de riesgo del terremoto";
+                String phone=tel.getText().toString();
+                sendSMS(phone, message);
+           /*here i can send message to emulator 5556. In Real device
+            *you can change number*/
+            }
+        });
+
+//0998390853
+
+        spec.setIndicator("Mensaje");
         host.addTab(spec);
 
         //Tab 3
@@ -111,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
     }
 
 
