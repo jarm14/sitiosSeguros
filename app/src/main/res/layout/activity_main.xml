@@ -60,6 +60,34 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
+                        <EditText
+                            android:id="@+id/txtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:hint="Escriba su nombre" />
+
+                        <TextView
+                            android:id="@+id/txtCodigo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="+593" />
+
+                        <EditText
+                            android:id="@+id/txtTel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Teléfono destinatario"
+                            android:inputType="phone" />
+
+                        <Button
+                            android:id="@+id/btnSendSMS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Send SMS" />
+
                     </LinearLayout>
 
                     <!--<LinearLayout
