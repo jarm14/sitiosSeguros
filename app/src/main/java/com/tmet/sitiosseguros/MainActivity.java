@@ -2,6 +2,7 @@ package com.tmet.sitiosseguros;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,20 +18,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterAdapter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.TwitterListener;
+import twitter4j.TwitterMethod;
+import twitter4j.conf.ConfigurationBuilder;
+
 
 public class MainActivity extends AppCompatActivity {
+
     ListView lstMenu;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         lstMenu = (ListView) findViewById(R.id.lstMenu);
 
         // Defined Array values to show in ListView
-        String[] values = new String[] { "TERREMOTO",
+        String[] values = new String[]{ "TERREMOTO",
                 "TSUNAMI",
                 "ERUPCIÓN VOLCÁNICA"
         };
@@ -61,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         lstMenu.setAdapter(adapter);
 
         // ListView Item Click Listener
-        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -80,16 +85,11 @@ public class MainActivity extends AppCompatActivity {
 //                        .show();
 
 
-                    Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
+                Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
                     myIntent.putExtra("position",position);
 
-                    startActivity(myIntent);
-
-
-
-
+                startActivity(myIntent);
             }
-
         });
 
         spec.setIndicator("Menu");
@@ -106,18 +106,7 @@ public class MainActivity extends AppCompatActivity {
         //spec.setContent(R.id.tab3);
         //spec.setIndicator("Comunícate");
         //host.addTab(spec);
-
-
-
-
-
     }
-
-
-
-
-
-
 }
 
 
