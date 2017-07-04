@@ -83,15 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 String  itemValue    = (String) lstMenu.getItemAtPosition(position);
 
                 // Show Alert
-<<<<<<< HEAD
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_SHORT)
-                        .show();
-=======
 //                Toast.makeText(getApplicationContext(),
 //                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
 //                        .show();
->>>>>>> 2697dd6e2eb5eec73e4e3b5be456e2ba4baf504e
+
 
 
                 Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
