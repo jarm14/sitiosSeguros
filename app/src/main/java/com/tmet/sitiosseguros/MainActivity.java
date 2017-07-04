@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_SHORT)
                         .show();
 
 
