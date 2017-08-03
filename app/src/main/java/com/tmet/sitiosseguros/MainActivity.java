@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,21 +16,14 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.onesignal.OneSignal;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import twitter4j.ResponseList;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterAdapter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.TwitterListener;
-import twitter4j.TwitterMethod;
-import twitter4j.conf.ConfigurationBuilder;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
         setContentView(R.layout.activity_main);
 
-        TabHost host = (TabHost)findViewById(R.id.tabHost);
+        TabHost host = (TabHost) findViewById(R.id.tabHost);
         host.setup();
 
         //Tab 1
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         lstMenu = (ListView) findViewById(R.id.lstMenu);
 
         // Defined Array values to show in ListView
-        String[] values = new String[]{ "TERREMOTO",
+        String[] values = new String[]{"TERREMOTO",
                 "TSUNAMI",
                 "ERUPCIÓN VOLCÁNICA"
         };
@@ -70,17 +69,17 @@ public class MainActivity extends AppCompatActivity {
         lstMenu.setAdapter(adapter);
 
         // ListView Item Click Listener
-        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        lstMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
                 // ListView Clicked item index
-                int itemPosition     = position;
+                int itemPosition = position;
 
 
                 // ListView Clicked item value
-                String  itemValue    = (String) lstMenu.getItemAtPosition(position);
+                String itemValue = (String) lstMenu.getItemAtPosition(position);
 
                 // Show Alert
 //                Toast.makeText(getApplicationContext(),
@@ -88,9 +87,8 @@ public class MainActivity extends AppCompatActivity {
 //                        .show();
 
 
-
                 Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
-                    myIntent.putExtra("position",position);
+                myIntent.putExtra("position", position);
 
                 startActivity(myIntent);
             }
@@ -104,17 +102,15 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.tab2);
 
         //setContentView(R.layout.message_config);
-        final EditText name=(EditText) findViewById(R.id.txtName);
-        final EditText tel=(EditText) findViewById(R.id.txtTel);
-
-
+        final EditText name = (EditText) findViewById(R.id.txtName);
+        final EditText tel = (EditText) findViewById(R.id.txtTel);
 
 
         Button btnSendSMS = (Button) findViewById(R.id.btnSendSMS);
         btnSendSMS.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String message="Hola, "+name.getText().toString()+" se encuentra en una zona de riesgo del terremoto";
-                String phone=tel.getText().toString();
+                String message = "Hola, " + name.getText().toString() + " se encuentra en una zona de riesgo del terremoto";
+                String phone = tel.getText().toString();
                 sendSMS(phone, message);
            /*here i can send message to emulator 5556. In Real device
             *you can change number*/
