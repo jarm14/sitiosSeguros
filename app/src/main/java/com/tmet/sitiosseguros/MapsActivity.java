@@ -233,14 +233,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng pos=new LatLng(lat,len);
             mMap.addMarker(new MarkerOptions().position(pos).title("Ubicación actual").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(11));
-            Toast.makeText(getApplicationContext(),"Su posición es: ("+lat+","+len+")", Toast.LENGTH_SHORT).show();
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+            //Toast.makeText(getApplicationContext(),"Su posición es: ("+lat+","+len+")", Toast.LENGTH_SHORT).show();
             if(lstSitios.size()!=0)
             {
                 for(int i=0;i<lstSitios.size();i++)
                 {
                     dist= SphericalUtil.computeDistanceBetween(coordenadas(lstSitios.get(i).getUbicacion()),pos);
-                    if(dist<=10000)
+                    if(dist<=5000)
                     {
                         values.add(lstSitios.get(i));
                     }
